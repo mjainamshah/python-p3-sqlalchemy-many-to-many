@@ -120,3 +120,11 @@ class TestReview:
         session.query(Game).delete()
         session.query(Review).delete()
         session.commit()
+
+def session():
+    engine = create_engine(SQLITE_URL)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    yield session
+    session.close()
+    
